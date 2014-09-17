@@ -23,16 +23,18 @@ object Main {
    * Exercise 2
    */
   def balance(chars: List[Char]): Boolean = {
-    def r(chars: List[Char], left: Int): Boolean = {
+    def dfs(str: List[Char], left: Int): Boolean = {
       if(left < 0) false
-      if(chars.isEmpty && left == 0) true
-
-
-      if(chars.head == '(') r(chars.tail, left+1)
-      else if(chars.head == ')') r(chars.tail, left-1)
-      else r(chars.tail, left)
+      else if(str.isEmpty) {
+        left == 0
+      }
+      else {
+        if (str.head == '(') dfs(str.tail, left + 1)
+        else if (str.head == ')') dfs(str.tail, left - 1)
+        else dfs(str.tail, left)
+      }
     }
-    r(chars, 0)
+    dfs(chars, 0)
   }
 
   /**
